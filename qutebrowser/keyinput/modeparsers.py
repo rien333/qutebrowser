@@ -280,7 +280,7 @@ class RegisterKeyParser(keyparser.CommandKeyParser):
         if match:
             return match
 
-        if keyutils.is_printable(e.key()):
+        if not keyutils.is_printable(e.key()):
             # this is not a proper register key, let it pass and keep going
             return QKeySequence.NoMatch
 
