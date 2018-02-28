@@ -30,6 +30,10 @@ from PyQt5.QtGui import QKeySequence, QKeyEvent
 from qutebrowser.utils import utils
 
 
+def is_printable(key):
+    return key <= 0xff
+
+
 def _key_to_string(key):
     """Convert a Qt::Key member to a meaningful name.
 
@@ -254,8 +258,7 @@ class KeyInfo:
         """Get the text which would be displayed when pressing this key."""
         if self.key == Qt.Key_Space:
             return ' '
-        elif self.key > 0xff:
-            # Unprintable keys
+        elif not is_printable(self.key):
             return ''
 
         text = QKeySequence(self.key).toString()
